@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آلة حساب الامتصاص المطلوب 🔬📊</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: #f9f9f9; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+        input, button { padding: 10px; margin: 10px; width: 90%; font-size: 16px; }
+        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .result { font-size: 18px; margin-top: 20px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔬 آلة حساب الامتصاص المطلوب 📊</h2>
+        <p>أدخل القيم التالية لحساب الامتصاص المطلوب لأي نتيجة</p>
+        
+        <label>🧪 الامتصاص الأول:</label>
+        <input type="number" id="x1" step="any">
+        
+        <label>📈 النتيجة الأولى:</label>
+        <input type="number" id="y1" step="any">
+        
+        <label>🧪 الامتصاص الثاني:</label>
+        <input type="number" id="x2" step="any">
+        
+        <label>📉 النتيجة الثانية:</label>
+        <input type="number" id="y2" step="any">
+        
+        <label>🎯 النتيجة المطلوبة:</label>
+        <input type="number" id="desiredY" step="any">
+        
+        <button onclick="calculateAbsorbance()">🔢 احسب الامتصاص المطلوب</button>
+        
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        function calculateAbsorbance() {
+            let x1 = parseFloat(document.getElementById('x1').value);
+            let y1 = parseFloat(document.getElementById('y1').value);
+            let x2 = parseFloat(document.getElementById('x2').value);
+            let y2 = parseFloat(document.getElementById('y2').value);
+            let desiredY = parseFloat(document.getElementById('desiredY').value);
+            
+            if (isNaN(x1) || isNaN(y1) || isNaN(x2) || isNaN(y2) || isNaN(desiredY)) {
+                document.getElementById('result').innerHTML = "⚠️ يرجى إدخال جميع القيم المطلوبة!";
+                return;
+            }
+            
+            let m = (y2 - y1) / (x2 - x1);
+            let b = y1 - m * x1;
+            let requiredX = (desiredY - b) / m;
+            
+            document.getElementById('result').innerHTML = `✅ الامتصاص المطلوب: <strong>${requiredX.toFixed(5)}</strong>`;
+        }
+    </script>
+</body>
+</html>
